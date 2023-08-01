@@ -55,6 +55,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### Directory Structure
 
+```
 ├── package-lock.json
 ├── package.json
 ├── public
@@ -106,3 +107,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 │ └── App.css
 └── utils
 └── index.js
+```
