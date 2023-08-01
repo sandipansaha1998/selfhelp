@@ -67,7 +67,7 @@ const MedicineCard = ({ medicine, setShowDeleteModal }) => {
               <Chip
                 avatar={
                   <Avatar className="fw-bold">
-                    {isMealBefore[index] ? "B/C" : "A/C"}
+                    {isMealBefore[index] ? "AC" : "PC"}
                   </Avatar>
                 }
                 label={

@@ -51,15 +51,18 @@ const MedicineIntake = ({
           </ListItemIcon>
           {/* Badge to denote after or before meal course */}
           <Badge
-            color="secondary"
+            color="primary"
             badgeContent={
-              med.isMealBefore[medicationTimingIndex] ? "B/C" : "A/C"
+              med.isMealBefore[medicationTimingIndex]
+                ? "Before Meal"
+                : "After Meal"
             }
             showZero
           >
             <ListItemText
               primary={med.name}
-              className={`${didIntake && "text-decoration-line-through"}`}
+              style={{ width: "80px" }}
+              className={`${didIntake && "text-decoration-line-through"} `}
             />
           </Badge>
         </ListItemButton>

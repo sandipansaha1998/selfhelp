@@ -45,6 +45,15 @@ export default function Medicine() {
   return (
     <div className="d-flex flex-column  col-12 p-4">
       {/* add medicine form */}
+      <div className="d-flex gap-4">
+        <div>
+          {" "}
+          <span className="badge bg-secondary">AC</span> : Before Meal
+        </div>
+        <div>
+          <span className="badge bg-secondary">PC</span> : After Meal
+        </div>
+      </div>
       <MedicineFormModal
         show={show}
         handleClose={handleClose}
