@@ -1,24 +1,26 @@
+import { useState } from "react";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import { DateField } from "@mui/x-date-pickers/DateField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-import SelectInput from "./SelectInput";
-import { addVital } from "../api";
-import { notify } from "./Notification";
+import SelectInput from "../Input/SelectInput";
+import { addVital } from "../../api";
+import { notify } from "../Misc/Notification";
 
-const FormModal = ({ show, handleClose, setUpdatedVital }) => {
+const VitalFormModal = ({ show, handleClose, setUpdatedVital }) => {
+  // Vitals
   const vitalTypes = {
     Sugar: "mg/dL",
     SPO2: "%",
     Systolic: "mmHg",
     Diastolic: "mmHg",
   };
+
   const initialState = {
     type: "Sugar",
     value: "",
@@ -28,11 +30,11 @@ const FormModal = ({ show, handleClose, setUpdatedVital }) => {
   const [formData, setFormData] = useState(initialState);
   const [currentVital, setCurrentVital] = useState("Sugar");
 
+  // Handles change of the input feilds and updates the correspoing feild in formData
   const handleChange = (e) => {
     if (!e) return;
-    // Time
     if (!e.target) {
-      console.log(e._d.toUTCString());
+      // Time updation
       setFormData({ ...formData, date: e._d.toUTCString() });
     } else {
       if (e.target.name === "type") {
@@ -41,17 +43,20 @@ const FormModal = ({ show, handleClose, setUpdatedVital }) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     }
   };
+  // Handles Form Submission
   const handleAddVital = async () => {
     // Validating form data
+    // Vital value must be numeric
     if (!/^\d+(\.\d+)?$/.test(formData.value)) {
       return notify().error("Enter only numeric vital values");
     }
+    // Date format
     if (formData.date === "" || formData.date === "Invalid Date") {
       return notify().error("Enter Valid Date");
     }
     setLoading(true);
+    // API call to add vital
     const response = await addVital(formData);
-    // Notify
     if (response.success) {
       setUpdatedVital(currentVital);
       notify().success("Record Added");
@@ -93,6 +98,7 @@ const FormModal = ({ show, handleClose, setUpdatedVital }) => {
             name="value"
           />
         </FormControl>
+        {/* Updation Date */}
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <DateField name="date" onChange={handleChange} />
         </LocalizationProvider>
@@ -113,4 +119,4 @@ const FormModal = ({ show, handleClose, setUpdatedVital }) => {
   );
 };
 
-export default FormModal;
+export default VitalFormModal;

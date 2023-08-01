@@ -4,12 +4,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuthContext } from "../hooks";
 
-import { Loader } from "./Loader";
-import { Auth, Home } from "../pages";
+import { Loader } from "./Misc/Loader";
+import { Auth, LandingPage } from "../pages";
 import { useEffect } from "react";
-
 function PrivateRoute({ children }) {
   const auth = useAuthContext();
+  // Auth contains the user context
+  // If no user redirect to login
   if (auth.user) {
     return children;
   } else return <Navigate to="/auth" />;
@@ -36,13 +37,13 @@ function App() {
     <div className="App">
       <ToastContainer />
       <Routes>
-        {/* Home */}
+        {/* Single page Application*/}
         <Route
           exact
           path="/"
           element={
             <PrivateRoute>
-              <Home />
+              <LandingPage />
             </PrivateRoute>
           }
         ></Route>

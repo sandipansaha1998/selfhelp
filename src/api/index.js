@@ -1,5 +1,5 @@
 import { API_URLS, LOCALSTORAGE_TOKEN_KEY } from "../utils";
-
+import moment from "moment";
 // Custom Fetch function to dynamically add parameters and HTTP Request type
 const customFetch = async (url, { body, ...customConfig }) => {
   // Retreives the JSON token
@@ -71,15 +71,59 @@ export const login = (formData) => {
   });
 };
 
+// Add Vital
 export const addVital = (formData) => {
   return customFetch(API_URLS.addVital(), {
     body: { ...formData },
     method: "POST",
   });
 };
-
+// Get Latest Vital
 export const getLatestVital = (vitalType) => {
   return customFetch(API_URLS.getLatestVital(vitalType), {
     method: "GET",
+  });
+};
+
+// Add medicine
+export const addMedicine = (formData) => {
+  return customFetch(API_URLS.addMedicine(), {
+    body: { ...formData },
+    method: "POST",
+  });
+};
+
+// Get medicine
+export const getMedicines = () => {
+  return customFetch(API_URLS.getMedicines(), {
+    method: "GET",
+  });
+};
+
+// Delete medicine
+export const deleteMedicine = (id) => {
+  return customFetch(API_URLS.deleteMedicine(id), {
+    method: "GET",
+  });
+};
+// Get medicine for current date
+export const getMedicineForToday = () => {
+  const curentUTCString = moment()
+    .startOf("day")
+    .utc()
+    .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+  return customFetch(API_URLS.getMedicineForDate(curentUTCString), {
+    method: "GET",
+  });
+};
+// Toggle medicine intake status
+export const toggleIntakeStatus = (id, timingIndex) => {
+  const curentUTCString = moment()
+    .startOf("day")
+    .utc()
+    .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+  return customFetch(API_URLS.toggleIntakeStatus(), {
+    body: { id, dateOfIntake: curentUTCString, timingIndex },
+    method: "POST",
   });
 };

@@ -1,11 +1,12 @@
-import { Avatar, Button, Paper, Typography } from "@mui/material";
-import LockIcon from "@mui/icons-material/Lock";
 import React, { useEffect, useState } from "react";
-import Input from "../components/Input";
+import { Avatar, Button, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import PersonIcon from "@mui/icons-material/Person";
-import { notify } from "../components/Notification";
+import LockIcon from "@mui/icons-material/Lock";
+
+import Input from "../components/Input/Input";
+import { notify } from "../components/Misc/Notification";
 import { signup } from "../api";
 import { useAuthContext } from "../hooks";
 import landing_illustration from "../assets/landing_illus.png";
@@ -26,13 +27,13 @@ const Auth = () => {
   const [formData, setFormData] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  // If no user is logged in
+  // If user is logged in
   useEffect(() => {
     if (auth.user) {
       navigate("/");
       return;
     }
-  }, [navigate, auth.user]);
+  }, []);
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
@@ -41,6 +42,7 @@ const Auth = () => {
     setFormData(initialState);
     setIsSignUp(!isSignUp);
   };
+  // Handles Form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -62,17 +64,19 @@ const Auth = () => {
         setLoading(false);
         return;
       }
+      // Matches pasword and confirm password
       if (formData.password !== formData.confirmPassword) {
         notify().error("Passwords donot match");
         setLoading(false);
         return;
       }
-
+      // Send registration request
       let response = await signup(formData);
       if (response.success) {
         notify().success("Successful Sign up");
         switchMode();
       } else {
+        // Failure
         notify().error(response.message);
       }
       setLoading(false);
@@ -88,6 +92,8 @@ const Auth = () => {
       setLoading(false);
     }
   };
+  // handles input change
+  // names are attached to different input fields  which is used to update the correspong state object value.
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -165,8 +171,8 @@ const Auth = () => {
                   icon={<LockIcon />}
                 />
               )}
+              {/* Submit Button */}
               <input
-                style={{}}
                 type="submit"
                 className="btn btn-dark col-12 mt-4 mx-auto rounded bg-dark  "
                 variant=""
@@ -183,6 +189,7 @@ const Auth = () => {
               />
             </div>
           </form>
+          {/* Toggles between login and sign up */}
           <Button className="text-end mt-2 " onClick={switchMode}>
             <u className=" ">
               {isSignUp

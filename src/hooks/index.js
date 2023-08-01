@@ -45,7 +45,6 @@ export const useProvideAuth = () => {
       if (response.success) {
         // Decodes the user
         const userDecoded = jwt_decode(response.data.token);
-        console.log(userDecoded);
         // Sets the user
         setUser(userDecoded);
         // Sets the JWT in the local storage for further usage
@@ -54,7 +53,6 @@ export const useProvideAuth = () => {
           response.data.token ? response.data.token : null
         );
         setError(null);
-        console.log("Returning From hook");
       } else {
         return {
           success: false,

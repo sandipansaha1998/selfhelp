@@ -1,13 +1,14 @@
+import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { useEffect, useState } from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ErrorIcon from "@mui/icons-material/Error";
-import { getLatestVital } from "../api";
 import CircularProgress from "@mui/material/CircularProgress";
 import moment from "moment";
 
+import { getLatestVital } from "../../api";
+// Recieves Vital details via props
 export default function VitalCard({
   type,
   lowerLimit,
@@ -17,13 +18,15 @@ export default function VitalCard({
 }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({ value: "", indicator: "", date: "" });
-
   useEffect(() => {
+    // Fecthes latest vital details
     async function getLatestValue(type) {
       setLoading(true);
+      // API call
       let response = await getLatestVital(type);
       setLoading(false);
       if (response.data) {
+        // Checks with response and marks it safe or danger
         setData({
           ...response.data,
           indicator:
@@ -34,21 +37,19 @@ export default function VitalCard({
         });
       }
     }
+    // First fetch
     if (updatedVital === "") getLatestValue(type);
+    // Updated vital reloads and fetches the data again
     else {
-      if (updatedVital === type) getLatestValue(type);
+      if (updatedVital === type) {
+        getLatestValue(type);
+      }
     }
-  }, [updatedVital]);
-
-  // useEffect(() => {
-  //   console.log(updatedVital);
-  //   console.log(type);
-  //   if (updatedVital === type) getLatestValue(type);
-  // }, [updatedVital]);
+  }, [updatedVital, higherLimit, lowerLimit, type]);
 
   return (
     <Card
-      className={`text-center p-2 col-12 col-md-5   col-lg-3  ${
+      className={`text-center p-2 col-6 col-md-5   col-lg-3  ${
         data.value
           ? data.indicator === "safe"
             ? "bg-success text-light"
@@ -57,14 +58,17 @@ export default function VitalCard({
       }`}
     >
       <CardContent>
+        {/* Vital Type */}
         <Typography variant="h5" color="text.light" gutterBottom>
           {type}
         </Typography>
+        {/* Vital Value */}
         <Typography variant="h3" component="div">
           {loading && <CircularProgress />}
           {!loading && (data.value ? data.value : "-")}
           {data.value && <span className="fs-6">{unit}</span>}
         </Typography>
+        {/* Advise */}
         <Typography sx={{ m: 1.5 }} color="text.light">
           {data.value ? (
             data.indicator === "safe" ? (
@@ -77,10 +81,11 @@ export default function VitalCard({
               </span>
             )
           ) : (
-            "-"
+            "You have no records"
           )}
         </Typography>
       </CardContent>
+      {/* Last updation date */}
       <div className="d-flex flex-column">
         <div>Last Updated</div>
         <div>

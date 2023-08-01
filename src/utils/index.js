@@ -5,6 +5,12 @@ export const API_URLS = {
   signup: () => `${API_ROOT}/user/register`,
   addVital: () => `${API_ROOT}/vital/add`,
   getLatestVital: (vitalType) => `${API_ROOT}/vital/latest/${vitalType}`,
+  addMedicine: () => `${API_ROOT}/medicine/add`,
+  getMedicines: () => `${API_ROOT}/medicine/getMedicines`,
+  deleteMedicine: (id) => `${API_ROOT}/medicine/delete/${id}`,
+  getMedicineForDate: (date) =>
+    `${API_ROOT}/medicine/getMedicineForDate/${date}`,
+  toggleIntakeStatus: () => `${API_ROOT}/medicine/toggleIntakeStatus`,
 };
 
 // Helper functions to read and write on local storage
