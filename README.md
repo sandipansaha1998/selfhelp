@@ -24,13 +24,17 @@
 
 ### Screen Shots
 
+#### Login
+
 ![Login](demo/login.png)
+
+#### Medicine Inventory
+
 ![Medicine inventory](demo/medicine_inventory.png)
+
+#### Vital Dashboard
+
 ![Vital Dashboard](demo/vital_dashboard.png)
-
-## Login
-
-![Alt Text](https://drive.google.com/file/d/1yyvY9S3AmCW81TzZYkyNkmYrfSPhDKne/view?usp=sharing)
 
 ### Tech Stack
 
@@ -48,3 +52,57 @@ In the project directory, you can run:
 
 Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### Directory Structure
+
+├── package-lock.json
+├── package.json
+├── public
+│ ├── index.html
+│ ├── manifest.json
+│ └── robots.txt
+└── src
+├── api
+│ └── index.js
+├── assets
+│ ├── brand.png
+│ ├── landing_illus.png
+│ ├── pill.png
+│ ├── syringe.png
+│ └── syrup.png
+├── components
+│ ├── App.js
+│ ├── Input
+│ │ ├── DosageTimmingInput.js
+│ │ ├── Input.js
+│ │ ├── MedicineIntake.js
+│ │ └── SelectInput.js
+│ ├── LandingPage
+│ │ ├── Home.js
+│ │ ├── VitalCard.js
+│ │ ├── VitalFormModal.js
+│ │ └── Vitals.js
+│ ├── Medicine
+│ │ ├── MedicineCard.js
+│ │ └── MedicineForm.js
+│ ├── Misc
+│ │ ├── Loader.js
+│ │ └── Notification.js
+│ └── SideBar
+│ ├── LeftSideBar.js
+│ └── RightSideBar.js
+├── hooks
+│ └── index.js
+├── index.css
+├── index.js
+├── pages
+│ ├── Auth.js
+│ ├── LandingPage.js
+│ ├── Medicine.js
+│ └── index.js
+├── providers
+│ └── AuthProvider.js
+├── styles
+│ └── App.css
+└── utils
+└── index.js
