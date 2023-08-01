@@ -6,6 +6,10 @@
 > Users gets the medicine list for the day where one can mark
 > each medication as "completed" once you've taken your prescribed dose.
 
+## [Hosted URL link](https://selfhelp-india.netlify.app/)
+
+### [Github repository of the backend API.](https://github.com/sandipansaha1998/selfhelp_api)
+
 ### Features
 
 - [x] User session management and authentication.
@@ -13,6 +17,20 @@
 - [x] Create,Read and Delete medicines
 - [x] Medicine List for current date.
 - [x] Single tap to mark a medication dosage completed.
+
+### Demo
+
+![Demo](demo/demo.gif)
+
+### Screen Shots
+
+![Login](demo/login.png)
+![Medicine inventory](demo/medicine_inventory.png)
+![Vital Dashboard](demo/vital_dashboard.png)
+
+## Login
+
+![Alt Text](https://drive.google.com/file/d/1yyvY9S3AmCW81TzZYkyNkmYrfSPhDKne/view?usp=sharing)
 
 ### Tech Stack
 
