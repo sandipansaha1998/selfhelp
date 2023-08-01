@@ -95,8 +95,12 @@ const MedicineFormModal = ({ show, handleClose, setMedicine }) => {
           </FormControl>
           {/* Medicine Name */}
           <FormControl className="col">
-            <TextField required name="name" onChange={handleChange} />
-            <FormHelperText>Medicine Name</FormHelperText>
+            <TextField
+              required
+              name="name"
+              onChange={handleChange}
+              placeholder="Medicine Name"
+            />
           </FormControl>
         </div>
         {/* Medicine dosage */}
@@ -108,10 +112,10 @@ const MedicineFormModal = ({ show, handleClose, setMedicine }) => {
                   {medicineTypes[currentMedicine]}
                 </InputAdornment>
               }
+              placeholder="Dosage"
               onChange={handleChange}
               name="dosage"
             />
-            <FormHelperText>Dosage</FormHelperText>
           </FormControl>
           {/* Doctor who prescribed */}
           <FormControl className="col">
@@ -121,15 +125,19 @@ const MedicineFormModal = ({ show, handleClose, setMedicine }) => {
               }
               onChange={handleChange}
               name="doctor"
+              placeholder="Name of the doctor"
             />
-            <FormHelperText>Prescribed by</FormHelperText>
           </FormControl>
         </div>
         <div className="row">
           {/* Starting Date */}
           <FormControl className="col">
             <LocalizationProvider dateAdapter={AdapterMoment}>
-              <DateField name="startingDate" onChange={handleChange} />
+              <DateField
+                name="startingDate"
+                onChange={handleChange}
+                format="DD-MM-YYYY"
+              />
             </LocalizationProvider>
             <FormHelperText>Starting Date</FormHelperText>
           </FormControl>
@@ -140,7 +148,6 @@ const MedicineFormModal = ({ show, handleClose, setMedicine }) => {
               name="duration"
               onChange={handleChange}
             />
-
             <FormHelperText>Duration in days</FormHelperText>
           </FormControl>
         </div>

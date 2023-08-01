@@ -11,6 +11,7 @@ import { notify } from "../components/Misc/Notification";
 export default function Medicine() {
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
+  // Stores medicine
   const [medicine, setMedicine] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState({
     id: "",
@@ -24,10 +25,11 @@ export default function Medicine() {
     if (response.success) {
       notify().success("Successfully Deleted");
       setMedicine((med) => {
-        if (med.id === showDeleteModal.id) return false;
+        if (med._id === showDeleteModal.id) return false;
         return true;
       });
     }
+    setShowDeleteModal({ ...showDeleteModal, show: false });
   };
   useEffect(() => {
     setLoading(true);
@@ -42,6 +44,7 @@ export default function Medicine() {
 
   return (
     <div className="d-flex flex-column  col-12 p-4">
+      {/* add medicine form */}
       <MedicineFormModal
         show={show}
         handleClose={handleClose}
@@ -82,11 +85,12 @@ export default function Medicine() {
           setShowDeleteModal({ id: "", show: false });
         }}
       >
+        {/* Confirm Delete modal */}
         <Modal.Header closeButton>
           <Modal.Title></Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          Are you sure you want to delete {showDeleteModal.id}
+        <Modal.Body className="text-center">
+          Are you sure you want to delete
         </Modal.Body>
         <Modal.Footer>
           <Button

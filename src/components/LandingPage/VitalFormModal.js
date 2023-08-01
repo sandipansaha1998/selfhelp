@@ -11,6 +11,7 @@ import Modal from "react-bootstrap/Modal";
 import SelectInput from "../Input/SelectInput";
 import { addVital } from "../../api";
 import { notify } from "../Misc/Notification";
+import moment from "moment";
 
 const VitalFormModal = ({ show, handleClose, setUpdatedVital }) => {
   // Vitals
@@ -100,7 +101,7 @@ const VitalFormModal = ({ show, handleClose, setUpdatedVital }) => {
         </FormControl>
         {/* Updation Date */}
         <LocalizationProvider dateAdapter={AdapterMoment}>
-          <DateField name="date" onChange={handleChange} />
+          <DateField name="date" onChange={handleChange} format="DD-MM-YYYY" />
         </LocalizationProvider>
       </Modal.Body>
       <Modal.Footer>

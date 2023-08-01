@@ -49,7 +49,7 @@ export default function VitalCard({
 
   return (
     <Card
-      className={`text-center p-2 col-6 col-md-5   col-lg-3  ${
+      className={`text-center p-2 col-6 col-md-5   col-lg-3 border border-light border-md-none  ${
         data.value
           ? data.indicator === "safe"
             ? "bg-success text-light"
