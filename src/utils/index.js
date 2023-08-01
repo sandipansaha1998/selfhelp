@@ -1,4 +1,4 @@
-const API_ROOT = "https://self-help-api.onrender.com";
+const API_ROOT = "https://self-help-api.onrender.com/api/v1";
 
 export const API_URLS = {
   login: () => `${API_ROOT}/user/create-session`,
