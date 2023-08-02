@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 
 import MedicineCard from "../components/Medicine/MedicineCard";
 import MedicineFormModal from "../components/Medicine/MedicineForm";
+
 import { getMedicines, deleteMedicine } from "../api";
 import { notify } from "../components/Misc/Notification";
 export default function Medicine() {
@@ -20,15 +21,21 @@ export default function Medicine() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleDelete = () => {
-    let response = deleteMedicine(showDeleteModal.id);
+  const handleDelete = async () => {
+    setLoading(true);
+    let response = await deleteMedicine(showDeleteModal.id);
+    console.log(response);
     if (response.success) {
       notify().success("Successfully Deleted");
       setMedicine((med) => {
-        if (med._id === showDeleteModal.id) return false;
-        return true;
+        const newMed = med.filter((medi) => {
+          if (medi._id === showDeleteModal.id) return false;
+          return true;
+        });
+        return newMed;
       });
     }
+    setLoading(false);
     setShowDeleteModal({ ...showDeleteModal, show: false });
   };
   useEffect(() => {
@@ -110,8 +117,12 @@ export default function Medicine() {
           >
             Cancel
           </Button>
-          <Button variant="danger" onClick={handleDelete}>
-            Delete
+          <Button
+            disabled={loading && true}
+            variant="danger"
+            onClick={handleDelete}
+          >
+            {loading ? "Deleting" : "Delete"}{" "}
           </Button>
         </Modal.Footer>
       </Modal>
