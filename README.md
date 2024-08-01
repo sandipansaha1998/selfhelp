@@ -1,6 +1,6 @@
 # SelfHelp
 
-> Web Application designed to track personal health and medcicines.
+> Web Application designed to track personal health and medicines.
 > The app allows you to effortlessly track your vital health signs and monitor medication routines.
 > It facilitates to manage entire records of ongoing medicines with all the required infomation like name,dosage,starting date,duration.
 > Users gets the medicine list for the day where one can mark
